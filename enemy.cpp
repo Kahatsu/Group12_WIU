@@ -1,21 +1,11 @@
-#include "enemy.h"
+#include <string>
+#include "Enemy.h"
 
-
-
-
-int enemy::getx() {
-	return x;
+Enemy::Enemy(double damage, double health, double max_health, std::string name, int mtd):Entity(damage,health,max_health,name){
+	moneyToDrop = mtd;
 }
 
-
-int enemy::gety() {
-	return y;
+int Enemy::getMoneyToDrop()
+{
+	return moneyToDrop;
 }
-
-
-
-
-int enemy::getturns() {
-	return turns;
-}
-
