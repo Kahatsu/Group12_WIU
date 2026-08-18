@@ -1,11 +1,19 @@
 #pragma once
-class Entity
-{
+class Entity{
 private:
-    int health;
-    int maxHealth;
-
+	double damage;
+	double health;
+	double max_health;
 public:
-    int getHealth() const;
+	Entity(double d, double h, double mh);
+	
+	double getDamage();
+	double changeDamage(double change);
+	
+	double getHealth();
+	double changeHealth(double change);
+
+	double getMaxHealth();
+	double changeMaxHealth(double change);
 };
 
