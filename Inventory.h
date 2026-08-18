@@ -6,15 +6,15 @@
 //Inventory keeps track of items only does not have ownership over anything
 class Inventory{
 private:
-	std::unordered_map<std::string, int> items;
+	std::unordered_map<std::string, int> consumables;
 	std::vector<std::string> weapons;
 	std::vector<std::string> armors;
 
 public:
 	Inventory();
 	
-	void addItem(std::string item, int quantity);
-	void removeItem(std::string item, int quantity);
+	void addConsumable(std::string item, int quantity);
+	void removeConsumable(std::string item, int quantity);
 
 	void addWeapon(std::string weapon);
 	void dropWeapon(std::string weapon);
@@ -22,6 +22,7 @@ public:
 	void addArmor(std::string armor);
 	void dropArmor(std::string armor);
 
-	void displayInventory();
+	void clearConsole();
+	void displayInventoryUI();
 };
 
