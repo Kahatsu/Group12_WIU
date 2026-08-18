@@ -5,9 +5,6 @@ private:
     int x;
     int y;
 
-    int health;
-    int maxHealth;
-
 public:
     Player();
 
@@ -18,6 +15,5 @@ public:
 
     int getX() const;
     int getY() const;
-
-    int getHealth() const;
 };
+
