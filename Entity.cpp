@@ -1,9 +1,16 @@
 #include "Entity.h"
+#include <string>
 
-Entity::Entity(double d, double h, double mh){
+Entity::Entity(double d, double h, double mh, std::string n){
 	damage = d;
 	health = h;
 	max_health = mh;
+	name = n;
+}
+
+void Entity::takeDamage(double damageTaken)
+{
+	health = health - damageTaken;
 }
 
 double Entity::getDamage()
@@ -35,5 +42,7 @@ double Entity::changeDamage(double change)
  {
 	 return max_health + change;
  }
+
+
 
 
