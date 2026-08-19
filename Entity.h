@@ -6,6 +6,7 @@ private:
 	//health is the entitys current health, max_health is the maximum health the entity can have
 	double health;
 	double max_health;
+	int cooldown;
 	std::string name;
 public:
 	Entity(double d, double h, double mh, std::string n);
@@ -15,12 +16,17 @@ public:
 
 	double getDamage();
 	//used to apply buffs/debuffs
-	double changeDamage(double change);
+	void changeDamage(double change);
 	
 	double getHealth();
-	double changeHealth(double change);
+	void changeHealth(double change);
 
 	double getMaxHealth();
-	double changeMaxHealth(double change);
+	void changeMaxHealth(double change);
+
+	int getCooldown();
+	void setCooldown(int new_cooldown);
 };
+
+
 
