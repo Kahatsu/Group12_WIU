@@ -1,13 +1,10 @@
 #pragma once
 #include "Consumables.h"
-#include "Player.h"
-class Potion :
+class SmokeBomb :
     public Consumables
 {
-private:
-    double healAmount;
 public:
-    Potion();
+    SmokeBomb();
 
     void useConsumable(Player* player);
 };

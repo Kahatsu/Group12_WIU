@@ -1,9 +1,11 @@
 #include "Potion.h"
 
-Potion::Potion(int heal) {
-	healAmt = heal;
+Potion::Potion():Consumables(0,"Potion")
+{
+	healAmount = 20;
 }
 
-double Potion::getHealAmt() {
-	return healAmt;
+void Potion::useConsumable(Player* player)
+{
+	player->changeHealth(20);
 }
