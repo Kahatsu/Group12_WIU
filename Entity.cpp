@@ -6,6 +6,7 @@ Entity::Entity(double d, double h, double mh, std::string n){
 	health = h;
 	max_health = mh;
 	name = n;
+	cooldown = 0;
 }
 
 void Entity::takeDamage(double damageTaken)
@@ -18,9 +19,9 @@ double Entity::getDamage()
 	return damage;
 }
 
-double Entity::changeDamage(double change)
+void Entity::changeDamage(double change)
 {
-	return damage + change;
+	damage + change;
 }
 
  double Entity::getHealth()
@@ -28,9 +29,9 @@ double Entity::changeDamage(double change)
 	return health;
 }
 
- double Entity::changeHealth(double change)
+ void Entity::changeHealth(double change)
  {
-	 return health + change;
+	 health + change;
  }
 
  double Entity::getMaxHealth()
@@ -38,11 +39,19 @@ double Entity::changeDamage(double change)
 	 return max_health;
  }
 
- double Entity::changeMaxHealth(double change)
+ void Entity::changeMaxHealth(double change)
  {
-	 return max_health + change;
+	 max_health + change;
  }
 
+ int Entity::getCooldown()
+ {
+	 return cooldown;
+ }
 
+ void Entity::setCooldown(int new_cooldown)
+ {
+	 cooldown = new_cooldown;
+ }
 
 
