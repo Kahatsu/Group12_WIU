@@ -6,8 +6,8 @@ class NiuLai :
 public:
     NiuLai();
 
-    void attack() override;
-    void special_attack() override;
+    void attack(Entity& player) override;
+    void special_attack(Entity& player) override;
 
 };
 
