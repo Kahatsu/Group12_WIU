@@ -2,19 +2,46 @@
 #include<algorithm>
 #include<vector>
 #include<iostream>
+#include<array>
 #include "Inventory.h"
 
 Inventory::Inventory(){
-	weapons.reserve(8);
-	armors.reserve(8);
+	weapons.reserve(11);
+	armors.reserve(3);
+
+	consumables_list = { "Potion","SmokeBomb" };
+	weapons_list = { "Gauntlets","Sword","Slingshot","Bow","Scythe","Dagger","Golden Vow Axe","Excalibur","Gate of Babylon","Luminosite Eternelle","Kanshou and Bakuya" };
+	armors_list = { "Iron Armor","Diamond Armor","Netherite Armor" };
 }
 
-void Inventory::addConsumable(std::string item, int quantity){
-	consumables[item] += quantity;
+void Inventory::addItems(Items& item)
+{
+	//check if consumable
+	for (int i = 0;i < consumables_list.size(); i++) {
+		if (item.getName() == consumables_list[i]) {
+			addConsumable(item.getName());
+		}
+	}
+	//check if weapon
+	for (int i = 0;i < weapons_list.size(); i++) {
+		if (item.getName() == weapons_list[i]) {
+			addWeapon(item.getName());
+		}
+	}
+	//check if armor						   
+	for (int i = 0;i < armors_list.size(); i++) {
+		if (item.getName() == armors_list[i]) {
+			addArmor(item.getName());
+		}
+	}
 }
 
-void Inventory::removeConsumable(std::string item, int quantity){
-	consumables[item] -= quantity;
+void Inventory::addConsumable(std::string item){
+	consumables[item]++;
+}
+
+void Inventory::removeConsumable(std::string item){
+	consumables[item]--;
 
 	if (consumables[item] <= 0) {
 		consumables.erase(item);
@@ -78,7 +105,7 @@ void Inventory::displayInventoryUI(){
 		for (auto& item : consumables) {
 			if (counter == option - 1) {
 				std::cout << "You consumed " << item.first << "\n";
-				removeConsumable(item.first,1);
+				removeConsumable(item.first);
 				break;
 			}
 			counter++;
