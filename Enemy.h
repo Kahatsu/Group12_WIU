@@ -18,8 +18,8 @@ public:
     int getMoneyToDrop();
     
     //use this to attack ----- (for now just add the text that should be shown. The dealing of damage itself will probably be done with the takeDamage function.)
-    virtual void attack() = 0;
+    virtual void attack(Entity& player) = 0;
 
     //use this to implement any special attacks e.g Bomba explosion  (Same as attack just add text for now unless attack has special feature that needs to be coded)
-    virtual void special_attack() = 0;
+    virtual void special_attack(Entity& player) = 0;
 };
