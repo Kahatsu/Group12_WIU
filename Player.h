@@ -1,19 +1,38 @@
 #pragma once
-class Player
+#include "Entity.h"
+#include "Map.h"
+#include "Inventory.h"
+class Player :
+    public Entity
 {
 private:
-    int x;
-    int y;
-
+    double weight;
+    int money;
+    Inventory inventory;
+    int x_coord;
+    int y_coord;
 public:
     Player();
+    
+    double getWeight();
+    double reduceWeight(double minus);
+    double gainWeight(double add);
 
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
+    int getMoney();
+    void gainMoney(int value);
+    void loseMoney(int value);
 
-    int getX() const;
-    int getY() const;
+    void equip();
+
+    void openInventory();
+    void pickUpItem();
+
+    void move(char key, Map* map);
+
+    int getXcoord();
+    void setXcoord(int new_pos);
+    
+    int getYcoord();
+    void setYcoord(int new_pos);
 };
 
