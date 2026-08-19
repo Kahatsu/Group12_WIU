@@ -48,6 +48,9 @@ void Map::loadMap(int floorNum)
         map[8][9] = '#';
         map[9][5] = '#';
         map[9][9] = '#';
+
+        // Merchant
+        map[4][7] = 'M';
         break;
 
     case 1:
@@ -713,6 +716,11 @@ void Map::drawMap()
             else if (map[row][col] == 'P')
             {
                 SetConsoleTextAttribute(hConsole, 10);
+            }
+            // Merchant colour
+            else if (map[row][col] == 'M')
+            {
+                SetConsoleTextAttribute(hConsole, 14);
             }
             else
             {

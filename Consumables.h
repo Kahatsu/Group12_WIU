@@ -9,4 +9,3 @@ public:
 
     virtual void useConsumable(Player* player) = 0;
 };
-

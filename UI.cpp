@@ -1,5 +1,7 @@
 #include "UI.h"
+#include "Player.h"
 #include "Inventory.h"
+#include "Merchant.h"
 #include <conio.h>
 #include <iostream>
 
@@ -38,22 +40,16 @@ void UI::showMap(Map& map, Player& player)
 }
 
 
-void UI::showInventory()
+void UI::showInventory(Player& player)
 {
     clearScreen();
 
     std::cout << "========================================" << std::endl;
     std::cout << "                INVENTORY               " << std::endl;
     std::cout << "========================================" << std::endl;
-
     std::cout << std::endl;
 
-    std::cout << "1. Items" << std::endl;
-    std::cout << "2. Weapons" << std::endl;
-    std::cout << "3. Armors" << std::endl;
-
-    std::cout << std::endl;
-    std::cout << "[Press E to return]" << std::endl;
+    player.openInventory();
 }
 
 
@@ -77,20 +73,77 @@ void UI::showInventory()
 //}
 
 
-//void UI::showMerchant()
-//{
-//    clearScreen();
-//
-//    std::cout << "========================================" << std::endl;
-//    std::cout << "                MERCHANT                " << std::endl;
-//    std::cout << "========================================" << std::endl;
-//}
+void UI::showMerchant(Player& player)
+{
+    clearScreen();
+
+    Merchant merchant;
+
+    bool merchantOpen = true;
+
+    while (merchantOpen)
+    {
+        clearScreen();
+
+        std::cout << "========================================" << std::endl;
+        std::cout << "                MERCHANT                " << std::endl;
+        std::cout << "========================================" << std::endl;
+
+        std::cout << std::endl;
+        std::cout << "        Welcome, Adventurer!" << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "----------------------------------------" << std::endl;
+        std::cout << "1. Potion          FREE" << std::endl;
+        std::cout << "2. SmokeBomb       FREE" << std::endl;
+        std::cout << "3. Leave" << std::endl;
+        std::cout << "----------------------------------------" << std::endl;
+
+        char choice = _getch();
+
+        // Potion
+        if (choice == '1')
+        {
+            std::string item = merchant.getItem(1);
+
+            player.addConsumable(item, 1);
+
+            clearScreen();
+
+            std::cout << "You received a " << item << "!" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Press any key to continue...";
+
+            _getch();
+        }
+
+        // SmokeBomb
+        else if (choice == '2')
+        {
+            std::string item = merchant.getItem(2);
+
+            player.addConsumable(item, 1);
+
+            clearScreen();
+
+            std::cout << "You received a " << item << "!" << std::endl;
+            std::cout << std::endl;
+            std::cout << "Press any key to continue...";
+
+            _getch();
+        }
+
+        // Leave merchant
+        else if (choice == '3')
+        {
+            merchantOpen = false;
+        }
+    }
+}
 
 
 void UI::run(Map& map, Player& player)
 {
-    bool inventoryOpen = false;
-
     // Load starting area
     map.loadMap(0);
 
@@ -105,39 +158,34 @@ void UI::run(Map& map, Player& player)
     {
         char input = _getch();
 
-        if (!inventoryOpen)
+        if (input == 'w' ||
+            input == 'W' ||
+            input == 'a' ||
+            input == 'A' ||
+            input == 's' ||
+            input == 'S' ||
+            input == 'd' ||
+            input == 'D')
         {
-            if (input == 'w' ||
-                input == 'W' ||
-                input == 'a' ||
-                input == 'A' ||
-                input == 's' ||
-                input == 'S' ||
-                input == 'd' ||
-                input == 'D')
+            player.move(input, &map);
+
+            if (player.getSteppedOnMerchant())
             {
-                player.move(input, &map);
-                showMap(map, player);
+                showMerchant(player);
             }
 
-            else if (input == 'e' || input == 'E')
-            {
-                inventoryOpen = true;
-                showInventory();
-            }
-
-            else if (input == 'q' || input == 'Q')
-            {
-                gameRunning = false;
-            }
+            showMap(map, player);
         }
-        else
+
+        else if (input == 'e' || input == 'E')
         {
-            if (input == 'e' || input == 'E')
-            {
-                inventoryOpen = false;
-                showMap(map, player);
-            }
+            showInventory(player);
+            showMap(map, player);
+        }
+
+        else if (input == 'q' || input == 'Q')
+        {
+            gameRunning = false;
         }
     }
 }
