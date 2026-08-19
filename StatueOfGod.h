@@ -3,7 +3,7 @@
 class StatueOfGod :
     public Enemy
 {
-    bool canBlockability;
+   int AbilityBlocked;
 
 public:
     StatueOfGod();

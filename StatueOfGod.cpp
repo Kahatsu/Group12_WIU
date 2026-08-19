@@ -3,7 +3,7 @@
 
 
 StatueOfGod::StatueOfGod() :Enemy(20, 200, 200, "Statue Of God", 50) {
-	canBlockability = true;
+	AbilityBlocked = -1;
 }
 
 void StatueOfGod::attack() {
