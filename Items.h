@@ -1,10 +1,14 @@
+#include<string>
+
 #pragma once
 class Items{
 private:
 	double weight;
+	std::string name;
 public:
-	Items(double item_weight);
+	Items(double item_weight, std::string name);
 	
-	const double getWeight();
+	double getWeight();
+	std::string getName();
 };
 
