@@ -3,6 +3,7 @@
 #include "UI.h"
 #include "Merchant.h"
 #include "Player.h"
+#include "Entity.h"
 
 std::string Merchant::getItem(int choice)
 {
@@ -19,7 +20,7 @@ std::string Merchant::getItem(int choice)
     }
 }
 
-Merchant::Merchant(Player* player)
+Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
 {
     bool merchantOpen = true;
 
@@ -32,7 +33,7 @@ Merchant::Merchant(Player* player)
         std::cout << "========================================" << std::endl;
 
         std::cout << std::endl;
-        std::cout << "        Welcome, Adventurer!" << std::endl;
+        std::cout << "  Welcome, Adventurer!, my name is Miku" << std::endl;
         std::cout << std::endl;
 
         std::cout << "----------------------------------------" << std::endl;
