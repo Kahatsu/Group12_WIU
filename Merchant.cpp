@@ -22,6 +22,7 @@ std::string Merchant::getItem(int choice)
 
 Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
 {
+    char conitnuekey{};
     bool merchantOpen = true;
 
     while (merchantOpen)
@@ -49,7 +50,7 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
         {
             std::string item = getItem(1);
 
-            player -> addConsumable(item, 1);
+            player->addConsumable(item);
 
             std::cout << "\033[H\033[2J" << std::flush;
 
@@ -57,7 +58,7 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
             std::cout << std::endl;
             std::cout << "Press any key to continue...";
 
-            _getch();
+            conitnuekey = _getch();
         }
 
         // SmokeBomb
@@ -65,7 +66,7 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
         {
             std::string item = getItem(2);
 
-            player -> addConsumable(item, 1);
+            player->addConsumable(item);
 
             std::cout << "\033[H\033[2J" << std::flush;
 
@@ -73,13 +74,16 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
             std::cout << std::endl;
             std::cout << "Press any key to continue...";
 
-            _getch();
+            conitnuekey = _getch();
         }
 
         // Leave merchant
         else if (choice == '3')
         {
             merchantOpen = false;
+        }
+        else {
+            continue;
         }
     }
 }
