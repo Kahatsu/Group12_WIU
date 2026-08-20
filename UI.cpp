@@ -18,7 +18,7 @@ void UI::showMap(Map& map, Player& player)
     std::cout << "                 DUNGEON                " << std::endl;
     std::cout << "========================================" << std::endl;
 
-    // Draw the map using your friend's Map class
+    // Draw the map using friend's Map class
     map.drawMap();
 
     std::cout << "----------------------------------------" << std::endl;
@@ -36,7 +36,7 @@ void UI::showMap(Map& map, Player& player)
     std::cout << "Weapon: Bare Fist" << std::endl;
 
     std::cout << "----------------------------------------" << std::endl;
-    std::cout << "[WASD] Move       [E] Inventory       [Q] Quit" << std::endl;
+    std::cout << "[WASD] Move  [E] Inventory  [F] Interact  [Q] Quit" << std::endl;
 }
 
 
@@ -77,68 +77,7 @@ void UI::showMerchant(Player& player)
 {
     clearScreen();
 
-    Merchant merchant;
-
-    bool merchantOpen = true;
-
-    while (merchantOpen)
-    {
-        clearScreen();
-
-        std::cout << "========================================" << std::endl;
-        std::cout << "                MERCHANT                " << std::endl;
-        std::cout << "========================================" << std::endl;
-
-        std::cout << std::endl;
-        std::cout << "        Welcome, Adventurer!" << std::endl;
-        std::cout << std::endl;
-
-        std::cout << "----------------------------------------" << std::endl;
-        std::cout << "1. Potion          FREE" << std::endl;
-        std::cout << "2. SmokeBomb       FREE" << std::endl;
-        std::cout << "3. Leave" << std::endl;
-        std::cout << "----------------------------------------" << std::endl;
-
-        char choice = _getch();
-
-        // Potion
-        if (choice == '1')
-        {
-            std::string item = merchant.getItem(1);
-
-            player.addConsumable(item, 1);
-
-            clearScreen();
-
-            std::cout << "You received a " << item << "!" << std::endl;
-            std::cout << std::endl;
-            std::cout << "Press any key to continue...";
-
-            _getch();
-        }
-
-        // SmokeBomb
-        else if (choice == '2')
-        {
-            std::string item = merchant.getItem(2);
-
-            player.addConsumable(item, 1);
-
-            clearScreen();
-
-            std::cout << "You received a " << item << "!" << std::endl;
-            std::cout << std::endl;
-            std::cout << "Press any key to continue...";
-
-            _getch();
-        }
-
-        // Leave merchant
-        else if (choice == '3')
-        {
-            merchantOpen = false;
-        }
-    }
+    Merchant merchant(&player);
 }
 
 
@@ -181,6 +120,11 @@ void UI::run(Map& map, Player& player)
         {
             showInventory(player);
             showMap(map, player);
+        }
+
+        else if (input == 'f' || input == 'F')
+        {
+            // interact thingy put here
         }
 
         else if (input == 'q' || input == 'Q')

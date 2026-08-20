@@ -30,7 +30,6 @@ public:
     void openInventory();
     void pickUpItem();
     void addConsumable(std::string item, int quantity); // honghonghong
-    void addWeapon(std::string weap);//wx
 
     void move(char key, Map* map);
 
@@ -43,4 +42,3 @@ public:
     bool getSteppedOnMerchant(); // get result of whether player stand on merchant anot
     char getCurrentTile();
 };
-
