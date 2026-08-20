@@ -77,7 +77,7 @@ void Chest::open(Player* player)
         
     }
     if(item != "") {
-        player->addConsumable(item, 1);
+        player->addConsumable(item);
         std::cout << std::endl;
         std::cout << "You received a " << item << "!" << std::endl;
         std::cout << std::endl;

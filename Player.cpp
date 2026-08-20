@@ -1,43 +1,44 @@
 #include "Player.h"
 #include<iostream>
 
-Player::Player():Entity(10,100,100,"placeholder")
+Player::Player() :Entity(10, 100, 100, "placeholder")
 {
-    weight = 50;
-    money = 10;
+	weight = 50;
+	money = 10;
 	x_coord = 17;
 	y_coord = 33;
 	interact = false;
+	interactType = ' ';
 }
 
 double Player::getWeight()
 {
-    return weight;
-}   
+	return weight;
+}
 
 double Player::reduceWeight(double minus)
 {
-    return weight - minus;
+	return weight - minus;
 }
 
 double Player::gainWeight(double add)
 {
-    return weight + add;
+	return weight + add;
 }
 
 int Player::getMoney()
 {
-    return money;
+	return money;
 }
 
 void Player::gainMoney(int value)
 {
-    money += value;
+	money += value;
 }
 
 void Player::loseMoney(int value)
 {
-    money -= value;
+	money -= value;
 }
 
 void Player::equip()
@@ -47,12 +48,12 @@ void Player::equip()
 
 void Player::openInventory()
 {
-    inventory.displayInventoryUI();
+	inventory.displayInventoryUI();
 }
 
 void Player::pickUpItem()
 {
-    
+
 }
 
 void Player::move(char key, Map* map)
@@ -90,6 +91,12 @@ void Player::move(char key, Map* map)
 		std::cout << "pressed f\n";
 		if ((map->checkMap(x_coord + 1, y_coord) == 'M') || (map->checkMap(x_coord - 1, y_coord) == 'M') || (map->checkMap(x_coord, y_coord + 1) == 'M') || (map->checkMap(x_coord, y_coord - 1) == 'M')) {
 			interact = true;
+			interactType = 'M';//wx
+			std::cout << "interacted\n";
+		}
+		else if ((map->checkMap(x_coord + 1, y_coord) == 'C') || (map->checkMap(x_coord - 1, y_coord) == 'C') || (map->checkMap(x_coord, y_coord + 1) == 'C') || (map->checkMap(x_coord, y_coord - 1) == 'C')) {//wx
+			interact = true;
+			interactType = 'C';
 			std::cout << "interacted\n";
 		}
 		break;
@@ -97,29 +104,29 @@ void Player::move(char key, Map* map)
 		map->updateMap('P', x_coord, y_coord);
 		break;
 	}
-	
+
 	map->setPlayerXCoord(x_coord);
 	map->setPlayerYCoord(y_coord);
 }
 
 int Player::getXcoord()
 {
-    return x_coord;
+	return x_coord;
 }
 
 void Player::setXcoord(int new_pos)
 {
-    x_coord = new_pos;
+	x_coord = new_pos;
 }
 
 int Player::getYcoord()
 {
-    return y_coord;
+	return y_coord;
 }
 
 void Player::setYcoord(int new_pos)
 {
-    y_coord = new_pos;
+	y_coord = new_pos;
 }
 
 void Player::addConsumable(std::string item)
@@ -132,6 +139,7 @@ void Player::addWeapon(std::string weap)
 	inventory.addWeapon(weap);
 }
 
+
 bool Player::getInteract()
 {
 	return interact;
@@ -141,4 +149,8 @@ bool Player::getInteract()
 void Player::setInteract()
 {
 	interact = false;
+}
+
+char Player::getInteractType() {
+	return interactType;
 }

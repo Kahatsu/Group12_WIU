@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Inventory.h"
 #include "Merchant.h"
+#include "Chest.h"
 #include <conio.h>
 #include <iostream>
 
@@ -81,15 +82,24 @@ void UI::showMerchant(Player& player)
 }
 
 
+void UI::showChest(Player& player, Chest& chest)
+{
+    clearScreen();
+
+    chest.open(&player);
+}
+
+
 void UI::run(Map& map, Player& player)
 {
     // Load starting area
     map.loadMap(0);
-
+    Chest chest(5, "weap", "bomb");
     // Place player on the map
     //map.updateMap('P', player.getXcoord(), player.getYcoord());
 
     showMap(map, player);
+    
 
     bool gameRunning = true;
 
@@ -111,7 +121,15 @@ void UI::run(Map& map, Player& player)
 
             if (player.getInteract())
             {
-                showMerchant(player);
+                if (player.getInteractType() == 'M') {
+                    showMerchant(player);
+                    
+                }
+                if (player.getInteractType() == 'C') {
+                    showChest(player, chest);
+                }
+
+
                 player.setInteract();
             }
 

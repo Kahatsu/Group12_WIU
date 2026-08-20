@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Chest.h"
 #include "Map.h"
 #include "Player.h"
 #include "Merchant.h"
@@ -14,6 +14,7 @@ public:
     // void showCombat();
     // void showOccurrence();
     void showMerchant(Player& player);
+    void showChest(Player& player, Chest& chest);
 
     void run(Map& map, Player& player);
 };
