@@ -106,7 +106,9 @@ void Map::drawMap()
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     for (int i = 0; i < 11; i++) {
-        std::cout << "        |";
+        std::cout << "        ";
+        SetConsoleTextAttribute(hConsole, 15);
+        std::cout << "|";
         for (int j = 0; j < 11; j++) {
             if (displayMap[i][j] == '#')
             {
@@ -124,6 +126,10 @@ void Map::drawMap()
             {
                 SetConsoleTextAttribute(hConsole, 6);
             }
+            else if (displayMap[i][j] == '.')
+            {
+                SetConsoleTextAttribute(hConsole, 0);
+            }
             else
             {
                 SetConsoleTextAttribute(hConsole, 8);
@@ -131,39 +137,9 @@ void Map::drawMap()
 
             std::cout << displayMap[i][j] << " ";
         }
+        SetConsoleTextAttribute(hConsole, 15);
         std::cout << "|" << std::endl;
     }
-
-    /*for (int row = 0; row < 70; row++)
-    {
-        for (int col = 0; col < 70; col++)
-        {
-            if (map[row][col] == '#')
-            {
-                SetConsoleTextAttribute(hConsole, 15);
-            }
-            else if (map[row][col] == 'P')
-            {
-                SetConsoleTextAttribute(hConsole, 10);
-            }
-            else if (map[row][col] == 'M')
-            {
-                SetConsoleTextAttribute(hConsole, 14);
-            }
-            else if (map[row][col] == 'C')
-            {
-                SetConsoleTextAttribute(hConsole, 6);
-            }
-            else
-            {
-                SetConsoleTextAttribute(hConsole, 8);
-            }
-
-            std::cout << map[row][col] << " ";
-        }
-
-        std::cout << std::endl;
-    }*/
 
     SetConsoleTextAttribute(hConsole, 7);
 }
