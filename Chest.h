@@ -4,7 +4,7 @@
 class Chest
 {
 	int money;
-	std::string potion;
+	std::string item;
 	std::string weapon;
 	bool opened;
 
@@ -12,10 +12,13 @@ public:
 	
 
 	int getamtofmoney();
-
-	Chest(int m, std::string w, std::string p);
+	std::string getWeapon();
+	std::string getItem();
+	Chest();
+	Chest(int m, std::string w, std::string i);
 
 	void open(Player* player);
+
 
 };
 
