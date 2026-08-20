@@ -22,8 +22,11 @@ std::string Merchant::getItem(int choice)
 
 Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
 {
-    char conitnuekey{};
+    char continueKey{};
     bool merchantOpen = true;
+
+    const int potionPrice = 5;
+    const int smokeBombPrice = 3;
 
     while (merchantOpen)
     {
@@ -37,9 +40,12 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
         std::cout << "  Welcome, Adventurer!, my name is Miku" << std::endl;
         std::cout << std::endl;
 
+        std::cout << "Gold: " << player->getMoney() << std::endl;
+
+        std::cout << std::endl;
         std::cout << "----------------------------------------" << std::endl;
-        std::cout << "1. Potion          FREE" << std::endl;
-        std::cout << "2. SmokeBomb       FREE" << std::endl;
+        std::cout << "1. Potion          " << potionPrice << " Gold" << std::endl;
+        std::cout << "2. SmokeBomb       " << smokeBombPrice << " Gold" << std::endl;
         std::cout << "3. Leave" << std::endl;
         std::cout << "----------------------------------------" << std::endl;
 
@@ -48,42 +54,63 @@ Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
         // Potion
         if (choice == '1')
         {
-            std::string item = getItem(1);
+            if (player->getMoney() >= potionPrice)
+            {
+                std::string item = getItem(1);
 
-            player->addConsumable(item);
+                player->loseMoney(potionPrice);
+                player->addConsumable(item);
 
-            std::cout << "\033[H\033[2J" << std::flush;
+                std::cout << "\033[H\033[2J" << std::flush;
 
-            std::cout << "You received a " << item << "!" << std::endl;
+                std::cout << "You bought a " << item << "!" << std::endl;
+                std::cout << "You spent " << potionPrice << " Gold." << std::endl;
+                std::cout << "Remaining Gold: " << player->getMoney() << std::endl;
+            }
+            else
+            {
+                std::cout << "\033[H\033[2J" << std::flush;
+
+                std::cout << "You don't have enough Gold!" << std::endl;
+            }
+
             std::cout << std::endl;
             std::cout << "Press any key to continue...";
-
-            conitnuekey = _getch();
+            continueKey = _getch();
         }
 
         // SmokeBomb
         else if (choice == '2')
         {
-            std::string item = getItem(2);
+            if (player->getMoney() >= smokeBombPrice)
+            {
+                std::string item = getItem(2);
 
-            player->addConsumable(item);
+                player->loseMoney(smokeBombPrice);
+                player->addConsumable(item);
 
-            std::cout << "\033[H\033[2J" << std::flush;
+                std::cout << "\033[H\033[2J" << std::flush;
 
-            std::cout << "You received a " << item << "!" << std::endl;
+                std::cout << "You bought a " << item << "!" << std::endl;
+                std::cout << "You spent " << smokeBombPrice << " Gold." << std::endl;
+                std::cout << "Remaining Gold: " << player->getMoney() << std::endl;
+            }
+            else
+            {
+                std::cout << "\033[H\033[2J" << std::flush;
+
+                std::cout << "You don't have enough Gold!" << std::endl;
+            }
+
             std::cout << std::endl;
             std::cout << "Press any key to continue...";
-
-            conitnuekey = _getch();
+            continueKey = _getch();
         }
 
         // Leave merchant
         else if (choice == '3')
         {
             merchantOpen = false;
-        }
-        else {
-            continue;
         }
     }
 }
