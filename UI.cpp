@@ -87,7 +87,7 @@ void UI::run(Map& map, Player& player)
     map.loadMap(0);
 
     // Place player on the map
-    map.updateMap('P', player.getXcoord(), player.getYcoord());
+    //map.updateMap('P', player.getXcoord(), player.getYcoord());
 
     showMap(map, player);
 
@@ -104,13 +104,15 @@ void UI::run(Map& map, Player& player)
             input == 's' ||
             input == 'S' ||
             input == 'd' ||
-            input == 'D')
+            input == 'D' ||
+            input == 'f')
         {
             player.move(input, &map);
 
-            if (player.getSteppedOnMerchant())
+            if (player.getInteract())
             {
                 showMerchant(player);
+                player.setInteract();
             }
 
             showMap(map, player);
@@ -122,12 +124,7 @@ void UI::run(Map& map, Player& player)
             showMap(map, player);
         }
 
-        else if (input == 'f' || input == 'F')
-        {
-            // interact thingy put here
-        }
-
-        else if (input == 'q' || input == 'Q')
+        else if (input == 'p' || input == 'P')
         {
             gameRunning = false;
         }
