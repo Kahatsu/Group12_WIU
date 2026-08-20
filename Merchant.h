@@ -6,7 +6,8 @@
 class Merchant : public Entity
 {
 public:
-   Merchant(Player* player);
+    Merchant(Player* player);
 
     std::string getItem(int choice);
 };
+
