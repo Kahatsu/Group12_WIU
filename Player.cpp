@@ -127,6 +127,11 @@ void Player::addConsumable(std::string item)
 	inventory.addConsumable(item);
 }
 
+void Player::addWeapon(std::string weap)
+{
+	inventory.addWeapon(weap);
+}
+
 bool Player::getInteract()
 {
 	return interact;
