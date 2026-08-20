@@ -48,7 +48,7 @@ void Player::addWeapon(std::string weapon) {
 	inventory.addWeapon(weapon);
 }
 
-void Player::addPotion(std::string potion) {
+void Player::addConsumable(std::string potion) {
 	inventory.addConsumable(potion, 1);
 }
 
