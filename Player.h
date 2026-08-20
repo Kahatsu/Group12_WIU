@@ -24,6 +24,9 @@ public:
 
     void equip();
 
+   void addWeapon(std::string weapon);
+   void addPotion(std::string potion);
+
     void openInventory();
     void pickUpItem();
 
