@@ -11,9 +11,12 @@ private:
     Inventory inventory;
     int x_coord;
     int y_coord;
+    bool steppedOnMerchant; // added to check whether player stand on merchant anot
+    char currentTile; // make variable for currentTile
+
 public:
     Player();
-    
+
     double getWeight();
     double reduceWeight(double minus);
     double gainWeight(double add);
@@ -24,18 +27,20 @@ public:
 
     void equip();
 
-   void addWeapon(std::string weapon);
-   void addConsumable(std::string potion);
-
     void openInventory();
     void pickUpItem();
+    void addConsumable(std::string item, int quantity); // honghonghong
+    void addWeapon(std::string weap);//wx
 
     void move(char key, Map* map);
 
     int getXcoord();
     void setXcoord(int new_pos);
-    
+
     int getYcoord();
     void setYcoord(int new_pos);
+
+    bool getSteppedOnMerchant(); // get result of whether player stand on merchant anot
+    char getCurrentTile();
 };
 
