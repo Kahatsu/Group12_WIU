@@ -27,7 +27,7 @@ void Chest::open(Player* player)
         player->addWeapon(weapon);
     }
     if(potion != "") {
-        player->addPotion(potion);
+        player->addConsumable(potion);
     }
     opened = true;
 }
