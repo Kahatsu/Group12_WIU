@@ -37,6 +37,8 @@ public:
     void setYcoord(int new_pos);
 
     void addConsumable(std::string item); // honghonghong
+    void addWeapon(std::string weap);//wx
+
 
     bool getInteract();
     void setInteract();
