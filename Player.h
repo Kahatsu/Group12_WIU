@@ -12,6 +12,7 @@ private:
     int x_coord;
     int y_coord;
     bool interact;
+ char interactType;//wx
 public:
     Player();
     
@@ -42,5 +43,7 @@ public:
 
     bool getInteract();
     void setInteract();
+
+   char getInteractType();//wx
 };
 
