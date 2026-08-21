@@ -1,5 +1,6 @@
 #include "Player.h"
 #include<iostream>
+#include<cctype>
 
 Player::Player() :Entity(10, 100, 100, "placeholder")
 {
@@ -58,7 +59,7 @@ void Player::pickUpItem()
 
 void Player::move(char key, Map* map)
 {
-	switch (key) {
+	switch (std::tolower(key)) {
 	case 'w':
 		if ((map->checkMap(x_coord, y_coord - 1) == 'o')) {
 			map->updateMap('o', x_coord, y_coord);
@@ -98,6 +99,11 @@ void Player::move(char key, Map* map)
 			interact = true;
 			interactType = 'C';
 			std::cout << "interacted\n";
+		}
+		else if ((map->checkMap(x_coord + 1, y_coord) == 'N') || (map->checkMap(x_coord - 1, y_coord) == 'N') || (map->checkMap(x_coord, y_coord + 1) == 'N') || (map->checkMap(x_coord, y_coord - 1) == 'N')) {//wx
+			interact = true;
+			interactType = 'N';
+			std::cout << "interacted with enemy\n";
 		}
 		break;
 	default:

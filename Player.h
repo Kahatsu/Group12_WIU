@@ -12,10 +12,10 @@ private:
     int x_coord;
     int y_coord;
     bool interact;
- char interactType;//wx
+    char interactType;//wx
 public:
     Player();
-    
+
     double getWeight();
     double reduceWeight(double minus);
     double gainWeight(double add);
@@ -33,7 +33,7 @@ public:
 
     int getXcoord();
     void setXcoord(int new_pos);
-    
+
     int getYcoord();
     void setYcoord(int new_pos);
 
@@ -44,6 +44,5 @@ public:
     bool getInteract();
     void setInteract();
 
-   char getInteractType();//wx
+    char getInteractType();//wx
 };
-

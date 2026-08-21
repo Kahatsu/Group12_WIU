@@ -5,6 +5,17 @@
 #include "Chest.h"
 #include <conio.h>
 #include <iostream>
+#include "Enemy.h"
+#include "Entity.h"
+#include "battleUI.h"
+#include "NiuLai.h"
+
+UI::UI()
+{
+    player = new Player;
+    map = new Map;
+    enemy = new NiuLai;
+}
 
 void UI::clearScreen()
 {
@@ -53,15 +64,14 @@ void UI::showInventory(Player& player)
     player.openInventory();
 }
 
+void UI::showCombat(Player& player, Enemy& enemy)
+{
+    clearScreen();
+    BUI.showBattle(player, enemy);
 
-//void UI::showCombat()
-//{
-//    clearScreen();
-//
-//    std::cout << "========================================" << std::endl;
-//    std::cout << "                 COMBAT                 " << std::endl;
-//    std::cout << "========================================" << std::endl;
-//}
+    std::cout << "\nPress any key to continue...";
+    _getch();
+}
 
 
 //void UI::showOccurrence()
@@ -99,7 +109,7 @@ void UI::run(Map& map, Player& player)
     //map.updateMap('P', player.getXcoord(), player.getYcoord());
 
     showMap(map, player);
-    
+
 
     bool gameRunning = true;
 
@@ -123,10 +133,13 @@ void UI::run(Map& map, Player& player)
             {
                 if (player.getInteractType() == 'M') {
                     showMerchant(player);
-                    
+
                 }
-                if (player.getInteractType() == 'C') {
+                else if (player.getInteractType() == 'C') {
                     showChest(player, chest);
+                }
+                else if (player.getInteractType() == 'N') {
+                    showCombat(player, *enemy);
                 }
 
 
@@ -146,5 +159,17 @@ void UI::run(Map& map, Player& player)
         {
             gameRunning = false;
         }
+    }
+}
+
+void UI::encounterEnemy()
+{
+    int percent{};
+    RandomNumGenerator ranNum;
+    percent = ranNum.getRandomNum(1, 100);
+
+    //10% chance
+    if (percent <= 10) {
+        BUI.showBattle(*player,*enemy);
     }
 }

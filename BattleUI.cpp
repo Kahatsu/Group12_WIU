@@ -1,10 +1,12 @@
 #include "BattleUI.h"
 #include <iostream>
 #include <conio.h>
+#include "Enemy.h"
 
-void BattleUI::showBattle(Player& player, Entity& enemy)
+void BattleUI::showBattle(Player& player, Enemy& enemy)
 {
-    system("cls");
+    std::cout << "IMHERE\n";
+    //system("cls");
 
     std::cout << "==================================================" << std::endl;
     std::cout << "                    BATTLE                        " << std::endl;
