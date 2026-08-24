@@ -1,6 +1,5 @@
 #include "Malenia.h"
 #include <iostream>
-#include <cstdlib>
 #include "RandomNumGenerator.h"
 
 Malenia::Malenia()
