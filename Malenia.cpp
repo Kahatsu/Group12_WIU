@@ -7,9 +7,6 @@ Malenia::Malenia()
     : Enemy(40, 150, 150, "Malenia", 50)
 {
     lifestealPercent = 0.05;
-
-    // Seed random number generator
-    srand(static_cast<unsigned int>(time(0)));
 }
 
 void Malenia::attack(Player* player)
@@ -49,4 +46,9 @@ void Malenia::special_attack(Player* player)
 double Malenia::getLifesteal()
 {
     return lifestealPercent;
+}
+
+void Malenia::setLifesteal(double percent)
+{
+    lifestealPercent = percent;
 }
