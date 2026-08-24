@@ -1,7 +1,7 @@
 #include "Malenia.h"
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include "RandomNumGenerator.h"
 
 Malenia::Malenia()
     : Enemy(40, 150, 150, "Malenia", 50)
@@ -11,26 +11,37 @@ Malenia::Malenia()
 
 void Malenia::attack(Player* player)
 {
-    player->takeDamage(getDamage());
+    RandomNumGenerator rannum;
 
-    double healAmount = getMaxHealth() * lifestealPercent;
-    changeHealth(healAmount);
-
-    if (getHealth() > getMaxHealth())
+    // 20% chance to use special attack
+    if (rannum.getRandomNum(1, 100) <= 20)
     {
-        changeHealth(getMaxHealth() - getHealth());
+        special_attack(player);
     }
+    else
+    {
+        player->takeDamage(getDamage());
 
-    std::cout << "Malenia attacks!" << std::endl;
-    std::cout << "Malenia regained "
-        << healAmount
-        << " HP!" << std::endl;
+        double healAmount = getMaxHealth() * lifestealPercent;
+        changeHealth(healAmount);
+
+        if (getHealth() > getMaxHealth())
+        {
+            changeHealth(getMaxHealth() - getHealth());
+        }
+
+        std::cout << "Malenia attacks!" << std::endl;
+        std::cout << "Malenia regained "
+            << healAmount
+            << " HP!" << std::endl;
+    }
 }
 
 void Malenia::special_attack(Player* player)
 {
     // Random number of hits between 1 and 5
-    int hits = rand() % 5 + 1;
+    RandomNumGenerator rannum;
+    int hits = rannum.getRandomNum(1, 5);
 
     std::cout << "Malenia uses Waterfowl Dance!" << std::endl;
     std::cout << "It hits " << hits << " times!" << std::endl;
