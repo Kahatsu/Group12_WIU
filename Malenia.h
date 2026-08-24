@@ -9,8 +9,9 @@ private:
 public:
     Malenia();
 
-    void attack(Player* player);
-    void special_attack(Player* player);
+    void attack(Player* player) override;
+    void special_attack(Player* player) override;
 
     double getLifesteal();
+    void setLifesteal(double percent);
 };
