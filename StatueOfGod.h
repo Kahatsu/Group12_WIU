@@ -9,8 +9,8 @@ private:
 public:
     StatueOfGod();
 
-    void attack(Player& player);
-    void special_attack(Player& player);
+    void attack(Player* player);
+    void special_attack(Player* player);
 
     void setAttackRestriction();
     int getAllowedAttack();
