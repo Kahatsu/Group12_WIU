@@ -3,12 +3,16 @@
 class StatueOfGod :
     public Enemy
 {
-   int AbilityBlocked;
+private:
+    int allowedAttack;   
 
 public:
     StatueOfGod();
 
-    void attack(Entity& player) override;
-    void special_attack(Entity& player) override;
-};
+    void attack(Player& player);
+    void special_attack(Player& player);
 
+    void setAttackRestriction();
+    int getAllowedAttack();
+
+};
