@@ -2,7 +2,7 @@
 #include "RandomNumGenerator.h"
 #include<iostream>
 
-CasperGhost::CasperGhost() :Enemy(10, 40, 40, "CasperGhost", 20) {
+CasperGhost::CasperGhost() :Enemy(10, 60, 60, "CasperGhost", 20) {
 
 }
 

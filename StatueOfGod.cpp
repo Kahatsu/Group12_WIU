@@ -3,25 +3,23 @@
 #include<iostream>
 
 
-StatueOfGod::StatueOfGod() :Enemy(20, 200, 200, "Statue Of God", 50) {
-   
+StatueOfGod::StatueOfGod() :Enemy(20, 250, 250, "Statue Of God", 120) {
+
     allowedAttack = 1;
-    
-    
 }
 
 void StatueOfGod::attack(Player* player)
 {
     RandomNumGenerator rannum;
 
-    if (rannum.getRandomNum(1, 100) <= 15)
+    if (rannum.getRandomNum(1, 100) <= 10)
     {
         std::cout << "The Statue of God stuns you!\n";
         player->setStun(true);
         return;
     }
 
-    if (rannum.getRandomNum(1, 100) <= 40)
+    if (rannum.getRandomNum(1, 100) <= 20)
     {
         special_attack(player);
     }
@@ -53,8 +51,6 @@ void StatueOfGod::setAttackRestriction()
         std::cout << "The Statue of God allows SPECIAL ATTACK only!\n";
     }
 }
-
-
 
 
 int StatueOfGod::getAllowedAttack()

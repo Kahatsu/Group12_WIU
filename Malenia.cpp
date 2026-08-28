@@ -3,7 +3,7 @@
 #include "RandomNumGenerator.h"
 
 Malenia::Malenia()
-    : Enemy(40, 150, 150, "Malenia", 50)
+    : Enemy(30, 300, 300, "Malenia", 100)
 {
     lifestealPercent = 0.05;
 }
@@ -12,8 +12,8 @@ void Malenia::attack(Player* player)
 {
     RandomNumGenerator rannum;
 
-    // 20% chance to use special attack
-    if (rannum.getRandomNum(1, 100) <= 20)
+    // 15% chance to use special attack
+    if (rannum.getRandomNum(1, 100) <= 15)
     {
         special_attack(player);
     }
@@ -47,7 +47,7 @@ void Malenia::special_attack(Player* player)
 
     for (int i = 0; i < hits; i++)
     {
-        player->takeDamage(60);
+        player->takeDamage(20);
 
         std::cout << "Hit " << i + 1 << "!" << std::endl;
     }

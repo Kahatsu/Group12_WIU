@@ -1,114 +1,204 @@
-#include <iostream>
-#include <conio.h>
-#include "UI.h"
 #include "Merchant.h"
 #include "Player.h"
-#include "Entity.h"
+#include <iostream>
+#include <conio.h>
+#include "Armor.h"
+
+Merchant::Merchant()
+    : Entity(50, 100000, 100000, 0, 0, "Miku")
+{
+}
 
 std::string Merchant::getItem(int choice)
 {
     switch (choice)
     {
     case 1:
-        return "Potion";
+        return "Health Potion";
+        break;
 
     case 2:
         return "SmokeBomb";
+        break;
+
+    case 3:
+        return "Mana Potion";
+        break;
+
+    case 4:
+        return "Iron Armor";
+        break;
+
+    case 5:
+        return "Diamond Armor";
+        break;
+
+    case 6:
+        return "Netherite Armor";
+        break;
 
     default:
         return "";
     }
 }
 
-Merchant::Merchant(Player* player) : Entity(50, 100000, 100000, "Miku")
+int Merchant::getPrice(int choice)
 {
-    char continueKey{};
-    bool merchantOpen = true;
+    switch (choice)
+    {
+    case 1:
+        return 5;      // Health Potion
+        break;
 
-    const int potionPrice = 5;
-    const int smokeBombPrice = 3;
+    case 2:
+        return 3;      // SmokeBomb
+        break;
+
+    case 3:
+        return 5;      // Mana Potion
+        break;
+
+    case 4:
+        return 10;      // Iron Armor
+        break;
+
+    case 5:
+        return 100;    // Diamond Armor
+        break;
+
+    case 6:
+        return 200;    // Netherite Armor
+        break;
+
+    default:
+        return 0;
+    }
+}
+
+void Merchant::openShop(Player* player)
+{
+    bool merchantOpen = true;
 
     while (merchantOpen)
     {
-        std::cout << "\033[H\033[2J" << std::flush;
+        system("cls");
 
-        std::cout << "========================================" << std::endl;
-        std::cout << "                MERCHANT                " << std::endl;
-        std::cout << "========================================" << std::endl;
+        std::cout << "==================================================" << std::endl;
+        std::cout << "                    MIKU'S SHOP                   " << std::endl;
+        std::cout << "==================================================" << std::endl;
+
+        std::cout << R"(
+        </\>_</\>   
+       / ( o.o ) \  
+      /   > ^ <   \
+     /  /|  |  |\  \
+     | / |  *  | \ |
+     |   |     |   | 
+     \             /
+    )" << std::endl;
+
+        std::cout << "        Welcome, Adventurer! My name is Miku." << std::endl;
+        std::cout << std::endl;
+
+        std::cout << "        Gold: " << player->getMoney() << " G" << std::endl;
 
         std::cout << std::endl;
-        std::cout << "  Welcome, Adventurer!, my name is Miku" << std::endl;
-        std::cout << std::endl;
+        std::cout << "--------------------------------------------------" << std::endl;
 
-        std::cout << "Gold: " << player->getMoney() << std::endl;
+        std::cout << "[1] Health Potion      5 G" << std::endl;
+        std::cout << "[2] SmokeBomb          3 G" << std::endl;
+        std::cout << "[3] Mana Potion        5 G" << std::endl;
+        if (player->hasArmor("Iron Armor"))
+        {
+            std::cout << "[4] Iron Armor        OWNED" << std::endl;
+        }
+        else
+        {
+            std::cout << "[4] Iron Armor        10 G" << std::endl;
+        }
 
-        std::cout << std::endl;
-        std::cout << "----------------------------------------" << std::endl;
-        std::cout << "1. Potion          " << potionPrice << " Gold" << std::endl;
-        std::cout << "2. SmokeBomb       " << smokeBombPrice << " Gold" << std::endl;
-        std::cout << "3. Leave" << std::endl;
-        std::cout << "----------------------------------------" << std::endl;
+        if (player->hasArmor("Diamond Armor"))
+        {
+            std::cout << "[5] Diamond Armor     OWNED" << std::endl;
+        }
+        else
+        {
+            std::cout << "[5] Diamond Armor    100 G" << std::endl;
+        }
+
+        if (player->hasArmor("Netherite Armor"))
+        {
+            std::cout << "[6] Netherite Armor   OWNED" << std::endl;
+        }
+        else
+        {
+            std::cout << "[6] Netherite Armor  200 G" << std::endl;
+        }
+
+        std::cout << "[7] Leave" << std::endl;
+
+        std::cout << "--------------------------------------------------" << std::endl;
 
         char choice = _getch();
 
-        // Potion
-        if (choice == '1')
+        if (choice == '1' || choice == '2' || choice == '3' || choice == '4' || choice == '5' || choice == '6')
         {
-            if (player->getMoney() >= potionPrice)
+            int itemChoice = choice - '0';
+
+            std::string item = getItem(itemChoice);
+            int price = getPrice(itemChoice);
+
+            system("cls");
+
+            if (item == "Iron Armor" ||
+                item == "Diamond Armor" ||
+                item == "Netherite Armor")
             {
-                std::string item = getItem(1);
+                // Check if player already owns the armor
+                if (player->hasArmor(item))
+                {
+                    std::cout << "You already own " << item << "!" << std::endl;
+                }
+                else if (player->getMoney() >= price)
+                {
+                    player->loseMoney(price);
+                    player->addArmor(item);
 
-                player->loseMoney(potionPrice);
-                player->addConsumable(item);
-
-                std::cout << "\033[H\033[2J" << std::flush;
-
-                std::cout << "You bought a " << item << "!" << std::endl;
-                std::cout << "You spent " << potionPrice << " Gold." << std::endl;
-                std::cout << "Remaining Gold: " << player->getMoney() << std::endl;
+                    std::cout << "You bought a " << item << "!" << std::endl;
+                    std::cout << std::endl;
+                    std::cout << "Cost: " << price << " G" << std::endl;
+                    std::cout << "Remaining Gold: "
+                        << player->getMoney() << " G" << std::endl;
+                }
+                else
+                {
+                    std::cout << "You don't have enough Gold!" << std::endl;
+                }
             }
             else
             {
-                std::cout << "\033[H\033[2J" << std::flush;
+                if (player->getMoney() >= price)
+                {
+                    player->loseMoney(price);
+                    player->addConsumable(item);
 
-                std::cout << "You don't have enough Gold!" << std::endl;
+                    std::cout << "You bought a " << item << "!" << std::endl;
+                    std::cout << std::endl;
+                    std::cout << "Cost: " << price << " G" << std::endl;
+                    std::cout << "Remaining Gold: "
+                        << player->getMoney() << " G" << std::endl;
+                }
+                else
+                {
+                    std::cout << "You don't have enough Gold!" << std::endl;
+                }
             }
 
             std::cout << std::endl;
             std::cout << "Press any key to continue...";
-            continueKey = _getch();
+            _getch();
         }
-
-        // SmokeBomb
-        else if (choice == '2')
-        {
-            if (player->getMoney() >= smokeBombPrice)
-            {
-                std::string item = getItem(2);
-
-                player->loseMoney(smokeBombPrice);
-                player->addConsumable(item);
-
-                std::cout << "\033[H\033[2J" << std::flush;
-
-                std::cout << "You bought a " << item << "!" << std::endl;
-                std::cout << "You spent " << smokeBombPrice << " Gold." << std::endl;
-                std::cout << "Remaining Gold: " << player->getMoney() << std::endl;
-            }
-            else
-            {
-                std::cout << "\033[H\033[2J" << std::flush;
-
-                std::cout << "You don't have enough Gold!" << std::endl;
-            }
-
-            std::cout << std::endl;
-            std::cout << "Press any key to continue...";
-            continueKey = _getch();
-        }
-
-        // Leave merchant
-        else if (choice == '3')
+        else if (choice == '7')
         {
             merchantOpen = false;
         }

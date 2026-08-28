@@ -1,11 +1,14 @@
 #include "Potion.h"
 
-Potion::Potion():Consumables(0,"Potion")
+Potion::Potion() : Consumables(0, "Health Potion")
 {
-	healAmount = 20;
+    healAmount = 50;
 }
 
 void Potion::useConsumable(Player* player)
 {
-	player->changeHealth(20);
+    player->changeHealth(healAmount);
+    if (player->getHealth() >  player->getMaxHealth()) {
+        player->changeHealth(-(player->getHealth() - player->getMaxHealth()));
+    }
 }
