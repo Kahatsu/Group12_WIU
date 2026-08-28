@@ -11,10 +11,15 @@
 class Enemy :
     public Entity
 {
+protected:
+    std::string enemyVoiceLines;
+
+
 private:
     int moneyToDrop;
+    int battleCounter;
 public:
-    Enemy(double damage, double health, double max_health, std::string name, int mtd);
+    Enemy(double damage, double health, double max_health,std::string name, int mtd);
 
     int getMoneyToDrop();
     
@@ -23,5 +28,11 @@ public:
 
     //use this to implement any special attacks e.g Bomba explosion  (Same as attack just add text for now unless attack has special feature that needs to be coded)
     virtual void special_attack(Player* player) = 0;
+
+    int getBattlecounter();
+    void changeBattlecounter(int value);
+
+    std::string getEnemyVoiceLines();
+
 };
 

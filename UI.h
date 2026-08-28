@@ -6,6 +6,9 @@
 #include "Merchant.h"
 #include "niuLai.h"
 #include "BattleUI.h"
+#include "Event.h"
+#include <vector>
+#include "Chest.h"
 
 class UI
 {
@@ -13,10 +16,18 @@ private:
     Player* player;
     Map* map;
     BattleUI BUI;
-    Enemy *enemy;
+    Enemy* enemy;
+    Event event;
+
+    std::vector<Chest> chests; // honghonghogn
+
+    Chest* getNearbyChest(Player& player); // honghonghogn
+
+    bool mikuDefeated; // Jervis
+
 public:
     UI();
-    
+
     void clearScreen();
 
     void showMap(Map& map, Player& player);
@@ -26,7 +37,8 @@ public:
     void showMerchant(Player& player);
     void showChest(Player& player, Chest& chest);
 
-    void run(Map& map, Player& player);
+    bool run(Map& map, Player& player, bool& playerWon);
 
-    void encounterEnemy();
+
+    void encounterEnemy(Player& player, Enemy* enemy);
 };

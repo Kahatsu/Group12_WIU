@@ -1,13 +1,17 @@
 #pragma once
-#include "Player.h"
-#include <string>
+
 #include "Entity.h"
+#include <string>
+
+class Player;
 
 class Merchant : public Entity
 {
 public:
-    Merchant(Player* player);
+    Merchant();
+
+    void openShop(Player* player);
 
     std::string getItem(int choice);
+    int getPrice(int choice);
 };
-

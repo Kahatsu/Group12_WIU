@@ -1,18 +1,12 @@
 #pragma once
 #include "Enemy.h"
-class StatueOfGod :
+class Golem :
     public Enemy
 {
-private:
-    int allowedAttack;
-
 public:
-    StatueOfGod();
+    Golem();
 
     void attack(Player* player);
     void special_attack(Player* player);
-
-    void setAttackRestriction();
-    int getAllowedAttack();
-
 };
+

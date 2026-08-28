@@ -7,7 +7,6 @@ public:
     NiuLai();
 
     void attack(Player* player);
-    void special_attack(Player* player);
-
+    void special_attack(Player* player) override;
 };
 

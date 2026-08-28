@@ -3,7 +3,7 @@
 class Map
 {
 private:
-    char map[80][90];
+    char map[80][120];
     int playerXCoord;
     int playerYCoord;
     char displayMap[11][11];
@@ -20,4 +20,7 @@ public:
     void setPlayerYCoord(int y);
 
     void updateDisplayMap();
+
+    void drawFullMap();
+
 };
